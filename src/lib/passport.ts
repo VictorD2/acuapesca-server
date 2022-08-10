@@ -28,33 +28,7 @@ passport.use(
         return done(null, user);
       } catch (error) {
         console.log(error);
-        return done(boom.internal('OcurriÛ un error inesperado'), false);
-      }
-    }
-  )
-);
-
-// REGISTER
-passport.use(
-  'local.signup',
-  new Strategy(
-    {
-      usernameField: 'email',
-      passwordField: 'password',
-      passReqToCallback: true,
-    },
-    async (req, email, password, done) => {
-      try {
-        const newUser: IUser = await ClsAuth.createUser(req.body);
-        return done(null, newUser);
-      } catch (error: any) {
-        let message = '';
-        if (error.original) {
-          if (error.original.code === 'ER_DUP_ENTRY') {
-            message = `El correo ${email} ya est· registrado`;
-          }
-        }
-        return done(boom.badRequest(message === '' ? error.message : message), false);
+        return done(boom.internal('Ocurri√≥ un error inesperado'), false);
       }
     }
   )

@@ -1,5 +1,5 @@
 import { Model } from 'sequelize';
-import { IRol, IRolModel } from './IRol';
+import { IRol } from './IRol';
 
 export interface IUserModel extends Model {
   id: number;
@@ -8,8 +8,11 @@ export interface IUserModel extends Model {
   email: string;
   password: string;
   status: boolean | number;
+  address: string;
+  dni: string;
+  photo: string;
   rol_id: number;
-  rol: IRolModel;
+  rol: IRol;
 }
 
 export interface IUser {
@@ -19,6 +22,9 @@ export interface IUser {
   email: string;
   password?: string;
   status: boolean | number;
+  address: string;
+  dni: string;
+  photo: string;
   rol_id: number;
   rol?: IRol;
 }

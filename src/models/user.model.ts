@@ -27,6 +27,19 @@ const User = <ModeloUser>sequelize.define('user', {
     allowNull: false,
     unique: true,
   },
+  photo: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: 'defaultPhotoProfile.png',
+  },
+  dni: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  address: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   password: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -35,6 +48,11 @@ const User = <ModeloUser>sequelize.define('user', {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: 1,
+  },
+  rol_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 2,
   },
 });
 

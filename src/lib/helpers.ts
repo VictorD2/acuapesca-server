@@ -40,9 +40,7 @@ export const validatorHandler = (schema: ObjectSchema, property: 'params' | 'bod
   return (req: Request, res: Response, next: NextFunction) => {
     const data = req[property];
     const { error } = schema.validate(data, { abortEarly: false });
-    if (error) {
-      next(boom.badRequest(error.message));
-    }
+    if (error) next(boom.badRequest(error.message));
     next();
   };
 };

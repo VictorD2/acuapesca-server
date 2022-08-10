@@ -12,6 +12,7 @@ import AuthRoutes from '@routes/auth.routes';
 import { boomErrorHandler, errorHandler, logErrors } from '@lib/helpers';
 import ClsDBConexion from '@class/ClsBDConexion';
 import ClsRol from '@class/ClsRol';
+import ClsSetting from '@class/ClsSetting';
 import ClsUser from '@class/ClsUser';
 
 declare global {
@@ -25,9 +26,10 @@ declare global {
       password: string;
       status: boolean | number;
       rol_id: number;
+      photo: string;
       rol: {
         id: number;
-        name: 'Administrador' | 'Usuario';
+        name: string;
       };
     }
   }
@@ -63,6 +65,7 @@ class App {
     this.app.set('port', this.port || process.env.PORT || 4000);
     await ClsRol.createInitialRols();
     await ClsUser.creatingAdminUser();
+    await ClsSetting.initConfig();
   }
 
   // Middlewares
