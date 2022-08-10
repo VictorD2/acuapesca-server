@@ -65,7 +65,7 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
 };
 
 // Edit User's Photo Controller
-export const editUserPhoto = async (req: Request, res: Response) => {
+export const editUserPhoto = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { file } = req.body;
 
@@ -73,7 +73,7 @@ export const editUserPhoto = async (req: Request, res: Response) => {
     const idUser = parseInt(`${id}`, 10);
     const user = await ClsUser.getUserById(idUser);
 
-    if (!user) return res.json({ error: 'No existe un usuario con esa id' });
+    if (!user) return next(boom.notFound('No existe un usuario con esa id'));
 
     const { photo } = user;
     if (`${photo}` !== 'defaultPhotoProfile.png') await deleteFile('../public/user_photos', `${photo}`);
@@ -86,7 +86,7 @@ export const editUserPhoto = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.log(error);
     if (error.code === 'ER_DUP_ENTRY') return res.json({ error: 'El correo ya está registrado' });
-    return res.json({ error: 'Ocurrió un error, intentelo más tarde' }).status(500);
+    return next(boom.internal(error.message));
   }
 };
 

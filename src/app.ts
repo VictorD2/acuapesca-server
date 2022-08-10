@@ -9,6 +9,7 @@ import '@lib/passport';
 import IndexRoutes from '@routes/index.routes';
 import UserRoutes from '@routes/user.routes';
 import AuthRoutes from '@routes/auth.routes';
+import ProcessRoutes from '@routes/process.routes';
 import { boomErrorHandler, errorHandler, logErrors } from '@lib/helpers';
 import ClsDBConexion from '@class/ClsBDConexion';
 import ClsRol from '@class/ClsRol';
@@ -82,6 +83,7 @@ class App {
   // Routes
   routes() {
     this.app.use('/api/v1/user/', UserRoutes);
+    this.app.use('/api/v1/process/', ProcessRoutes);
     this.app.use('/api/v1/auth/', AuthRoutes);
     this.app.use(IndexRoutes);
     this.app.use(logErrors);
